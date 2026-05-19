@@ -11,17 +11,7 @@ LangChain → LLM workflows & prompt orchestration
 Azure OpenAI GPT-4o → AI reasoning & summarization
 
 ## High level architectural flow
-User Input / Data (JSON)
-↓
-Node.js Backend (Agent Orchestrator)
-↓
-Semantic Kernel (Agent Logic)
-↓
-LLM (GPT-4o)
-↓
-Tools (Functions)
-↓
-Output (Console / Email)
+User Input / Data (JSON) -> Node.js Backend (Agent Orchestrator) -> Semantic Kernel (Agent Logic) -> LLM (GPT-4o) -> Tools (Functions) -> Output (Console / Email)
 
 ## Team Members
 - Rupali Shrivastava
