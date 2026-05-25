@@ -1,0 +1,31 @@
+{
+  "meeting_id": "standup-2026-04-16",
+  "date": "2026-04-16",
+  "day": "Thursday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": ["Suresh", "Vikram", "Rahul", "Neha", "Priya", "Ananya", "Rajan"],
+  "transcript": [
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:00", "text": "Rahul — first thing. Redis is still not up. I've been writing the async queue code against a mock but I can't do proper integration testing without real infra. What's the status Vikram?" },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:01", "text": "Rajan sir's mail went yesterday afternoon. Infra team replied this morning — they said they'll provision Redis by 2pm today. I've been following up since 8am." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:02", "text": "Okay. Suresh — keep going with mock till 2pm. What percentage of the code can you complete without real infra?" },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:02", "text": "Producer side is fully done. Consumer logic is about 70% done. The retry scheduler and dead-letter queue handling — those I need to test against real Redis. So maybe 60-65% overall without infra." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:03", "text": "That's fine. You have today afternoon and tomorrow. Neha how are UAT preparations going?" },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:04", "text": "I'm preparing the UAT scenario document for client's team. But I've been thinking about what client testers will actually try. Not just happy path. Things like — user closes the browser in the middle of a payment. Same order getting submitted twice if someone clicks pay twice. Refund initiated immediately after payment before it's fully settled. These are business edge cases, not just technical." },
+    { "speaker": "Priya",  "role": "PM",           "time": "09:05", "text": "Those are exactly the kind of things client UAT team will do on Day 1." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:06", "text": "Neha good thinking. Suresh, Ananya — I need both of you to sit with Neha for an hour today. Walk her through your code paths so she understands what's handled and what isn't. Then we can plug the gaps before Monday." },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:07", "text": "After 2pm works, once Redis is hopefully up and I've switched from mock." },
+    { "speaker": "Ananya", "role": "Frontend Dev", "time": "09:07", "text": "3pm for me. I have a design review till 2:30." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:08", "text": "3pm works. I'll prepare the scenario list and we go through it together." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:09", "text": "Good. Priya — you mentioned the intermittent prod failures are still open. Suresh, any new hits?" },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:10", "text": "Yes. Two more occurred yesterday evening, between 7 and 9pm. That's consistent — peak usage time. The async queue will directly solve this. Instead of the request failing, it'll queue and retry automatically. But right now those 2 cases are still live in prod." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:11", "text": "So going into UAT Monday we potentially still have live intermittent failures in prod. If client's UAT team hits one of those during testing —" },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:12", "text": "That's exactly why we need the async queue done before Monday. Suresh — realistic check. If Redis is up at 2pm today, can you be done by tomorrow EOD?" },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:12", "text": "If nothing unexpected comes up — yes. Tomorrow EOD is achievable." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:13", "text": "Then Neha needs Saturday to test the async queue. That leaves Sunday as pure buffer if anything breaks." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "09:14", "text": "Sunday buffer is not comfortable. What if something comes up Sunday?" },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:15", "text": "Sir I understand. But honestly — we lost 2 days in week 1 to infra environment issues. Day 1 the env wasn't set up. Day 4 the SSL cert. Those weren't development delays. We're working with the timeline we have left." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "09:16", "text": "Okay. I hear you. Let's make it work. Everyone on standby this weekend." },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:17", "text": "I'll be available. Moment Redis is up I'll ping Suresh directly so he doesn't have to wait." }
+  ]
+}
