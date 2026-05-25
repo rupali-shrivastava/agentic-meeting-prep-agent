@@ -1,0 +1,30 @@
+{
+  "meeting_id": "standup-2026-04-10",
+  "date": "2026-04-10",
+  "day": "Friday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": ["Priya", "Neha", "Rahul", "Suresh", "Rajan", "Ananya", "Vikram"],
+  "transcript": [
+    { "speaker": "Priya",  "role": "PM",           "time": "08:45", "text": "Good morning. Okay it's Friday. Go-live day. Neha you were running tests last night — tell us." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "08:46", "text": "So SSL got fixed at 11:15pm. I started running on prod immediately. Ran till about 1:30am. Results — 30 out of 34 passing on prod. 4 failing." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "08:47", "text": "Which 4?" },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "08:47", "text": "2 are the gateway-down scenarios we already decided to descope — so those are expected. But 2 are new failures I wasn't seeing on staging. They're intermittent — sometimes pass, sometimes fail. No consistent pattern. I ran each one 5 times. 2 passed, 3 failed roughly." },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "08:48", "text": "Intermittent on prod but not staging — I think it's the gateway response time. Remember from Day 1 I said SLA is up to 8 seconds. In prod with real network conditions, peak load might push it even further. We have 10 second timeout but maybe under load it's not enough." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:49", "text": "That's my guess too. It's not a code bug exactly. It's environment and load dependent." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "08:50", "text": "Okay. So the actual picture is — 30 stable passing, 2 descoped gateway-down, 2 intermittent load-related. Priya what's the call?" },
+    { "speaker": "Priya",  "role": "PM",           "time": "08:51", "text": "I think we go with partial go-live. The core happy path is solid — payment initiation, success, failure handling, all working. The 2 intermittent cases we document clearly and put on monitoring. We're transparent with client." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "08:52", "text": "Partial go-live is not what we committed. I told client full payment API by Friday. That is what I said." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "08:53", "text": "Sir, with due respect — Monday we lost half the day to infra env issue. Wednesday the demo failed because of staging v1 vs v2 miscommunication. Yesterday morning we found a prod SSL cert difference that Vikram had flagged 2 weeks ago and nobody acted on it. We lost almost 2 full days to environment issues that were completely outside the development team's control. If we had those 2 days we would have had everything tested and solid." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "08:54", "text": "I understand that Rahul. But client doesn't want to hear our internal reasons." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "08:55", "text": "I know sir. I'm not saying we tell client all this. I'm saying — pushing a go-live with 2 known intermittent failures is riskier than a transparent partial go-live with a documented hotfix plan. If it fails in prod with real transactions, that's much worse than what we're managing now." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "08:56", "text": "I agree with Rahul. I can write up the 2 intermittent cases with full detail — what conditions trigger them, what the workaround is, what the fix plan is. That gives client something concrete." },
+    { "speaker": "Priya",  "role": "PM",           "time": "08:57", "text": "Rajan sir — let me draft the go-live communication. I'll frame it as 'Phase 1 go-live' with known limitations documented and a hotfix ETA. It's honest and it protects us." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "08:58", "text": "Fine. Draft it and send to me before you send to client. I'll review. But Neha, Suresh — weekend monitoring. Any issue in prod, I need you to respond within 15 minutes. I mean that." },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "08:59", "text": "Okay sir. I'll keep my phone on." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "08:59", "text": "Noted. I'll set up alerts." },
+    { "speaker": "Ananya", "role": "Frontend Dev", "time": "09:00", "text": "I'm also available over the weekend if any UI issue comes up." },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:01", "text": "I'll keep infra monitoring on. Redis and the app servers — I'll watch them." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:02", "text": "Team — this was a really rough week. A lot of things went wrong that shouldn't have. But everyone stayed on it, worked late, and we got to 30 out of 34 on prod. That's not nothing. Let's see how the weekend goes." }
+  ]
+}

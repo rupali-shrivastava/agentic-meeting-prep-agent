@@ -1,0 +1,29 @@
+{
+  "meeting_id": "standup-2026-04-06",
+  "date": "2026-04-06",
+  "day": "Monday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": ["Priya", "Rahul", "Vikram", "Neha", "Suresh", "Ananya", "Rajan"],
+  "transcript": [
+    { "speaker": "Priya",  "role": "PM",           "time": "09:01", "text": "Good morning everyone. Okay so this is go-live week. Payment API is supposed to go live by Wednesday EOD as per the plan. Rahul, let's start with you — where are we?" },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:02", "text": "So API development is done on our side. The code is ready, reviewed, merged. But the staging environment is still pointing to old DB config from last sprint. Vikram was supposed to fix this Friday but I don't think it happened." },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:02", "text": "I did fix it on Friday. I updated the config and raised the infra ticket. But central infra team needs to apply it on their end. I followed up Friday evening, no response yet." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:03", "text": "Okay, so until infra applies it, Neha's team can't even connect to staging. Is that correct Neha?" },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:03", "text": "Yes. We tried connecting Friday afternoon, 3-4 times. Connection timeout every single time. So right now we have zero test coverage on the payment flow. Nothing." },
+    { "speaker": "Priya",  "role": "PM",           "time": "09:04", "text": "Vikram can you ping infra right now on Teams? Like right now during this call? We need this today." },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:04", "text": "Yes pinging. One second..." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "09:05", "text": "What's the overall situation Priya. Give me the full picture." },
+    { "speaker": "Priya",  "role": "PM",           "time": "09:06", "text": "Sir, staging environment is blocked since Friday — infra config issue. Vikram has done his part, it's with central infra now. We're pushing for resolution by 11am today. Once that's done Neha can start testing." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "09:06", "text": "Client called me this morning. They are expecting go-live Wednesday. They've already told their internal team. If we slip that date they will escalate to the BU head. Let's make sure that doesn't happen." },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:07", "text": "Rahul one thing I wanted to flag — the payment gateway sandbox credentials. Client sent them last Tuesday but I realized I haven't verified if we're hitting the correct endpoint. The doc they sent has two URLs and I'm not sure which one is for sandbox." },
+    { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:08", "text": "Suresh that needs to be sorted today itself. If we're hitting the wrong endpoint everything will fail even after env is fixed." },
+    { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:08", "text": "Yes I'll verify. I'll also share the API response schema with Ananya today. She was waiting on it." },
+    { "speaker": "Ananya", "role": "Frontend Dev", "time": "09:09", "text": "Yes please. I have the payment confirmation page mostly done but I can't finalize the field mapping without the actual response structure. Also there's a small alignment issue on mobile view — I'll fix that today, maybe 2 hours max." },
+    { "speaker": "Priya",  "role": "PM",           "time": "09:10", "text": "Okay. So to summarize action items — Vikram follow up with infra, we need env by 11am. Suresh verify gateway endpoint and share schema with Ananya by 12pm. Neha keep test cases ready so the moment env is up we start running. Ananya fix the mobile alignment." },
+    { "speaker": "Neha",   "role": "QA Lead",      "time": "09:11", "text": "34 test cases are ready. I just need the environment. The moment it's up I'll start." },
+    { "speaker": "Vikram", "role": "DevOps",       "time": "09:11", "text": "Infra guy just replied. He says he'll apply the config by 10:30. I'll confirm once it's done." },
+    { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "09:12", "text": "Good. Priya I want a status message in the group by 12pm — env status, testing started or not, any blockers. Don't wait for tomorrow's standup." },
+    { "speaker": "Priya",  "role": "PM",           "time": "09:12", "text": "Will do sir." }
+  ]
+}
