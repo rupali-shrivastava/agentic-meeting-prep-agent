@@ -1,6 +1,9 @@
 import express from "express";
-import meetingData from "./data/mockData.json" assert { type: "json" };
+import dotenv from "dotenv";
+import meetingData from "./data/mockData.json" with { type: "json" };
 import { runMeetingAgent } from "./agent/meetingAgent.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -9,6 +12,6 @@ app.get("/", async (req, res) => {
   res.json(result);
 });
 
-app.listen(3000, () => {
-  console.log("🚀 Server running on port 3000");
+app.listen(process.env.PORT, () => {
+  console.log(`🚀 Server running on port ${process.env.PORT}`);
 });
