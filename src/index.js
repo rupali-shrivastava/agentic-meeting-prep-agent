@@ -1,23 +1,31 @@
 import express from "express";
 import dotenv from "dotenv";
-import meetingData from "./data/mockData.json" with { type: "json" };
-import { runMeetingAgent } from "./agent/meetingAgent.js";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import meetingsRouter from "./routes/meetings.js";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
-app.get("/", async (req, res) => {
-  const result = await runMeetingAgent(meetingData);
-  res.json(result);
-});
+// Serve frontend static files so visiting '/' loads frontend/index.html
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendPath = path.join(__dirname, "..", "frontend");
+app.use(express.static(frontendPath));
 
-app.get("/meetings", (req, res) => {
-  res.json(meetingData);
-});
+// Use meetings router for API endpoints
+app.use("/api", meetingsRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`🚀 Server running on port ${process.env.PORT}`);
+// Backwards-compatible shorter routes for frontend (optional)
+app.get("/meetings", (req, res) => res.redirect("/api/meetings"));
+app.post("/prepare", (req, res, next) => res.redirect(307, "/api/prepare"));
+app.post("/prepare/batch", (req, res, next) => res.redirect(307, "/api/prepare/batch"));
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`🚀 Server running on port ${port}`);
 });
