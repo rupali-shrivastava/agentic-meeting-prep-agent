@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #dbeafe);
+  color: #111;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 25px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #1e3a8a;
+}
+
+.header p {
+  margin-top: 5px;
+  color: #6b7280;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Panels */
+.left-panel, .right-panel {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Meeting Cards */
+.meeting-card {
+  border-left: 5px solid #3b82f6;
+  background: #f9fafb;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+}
+
+.meeting-card:hover {
+  transform: translateY(-4px);
+  background: #eef2ff;
+}
+
+.meeting-card h3 {
+  margin: 0 0 8px;
+  color: #1d4ed8;
+}
+
+.meeting-card p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Button */
+button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+/* Brief */
+#brief {
+  white-space: pre-wrap;
+  background: #0f172a;
+  color: #e5e7eb;
+  padding: 15px;
+  border-radius: 12px;
+  min-height: 300px;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
