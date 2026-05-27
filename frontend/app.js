@@ -82,7 +82,13 @@ async function generateBrief() {
         html += `<strong>Preparation Points</strong><ul>${preparationPoints.map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>`;
       }
       if (followUps.length) {
-        html += `<strong>Open Follow-ups</strong><ul>${followUps.map(f => `<li>${escapeHtml(typeof f === "string" ? f : JSON.stringify(f))}</li>`).join("")}</ul>`;
+        html += `<strong>Open Follow-ups</strong><ul>${followUps.map(f => {
+          if (typeof f === "string") return `<li>${escapeHtml(f)}</li>`;
+          const item     = escapeHtml(f.item || f.action || "");
+          const owner    = f.owner ? `<span style="color:#fbbf24"> — ${escapeHtml(f.owner)}</span>` : "";
+          const deadline = f.deadline ? `<span style="color:#94a3b8;font-size:12px"> (Due: ${escapeHtml(f.deadline)})</span>` : "";
+          return `<li>${item}${owner}${deadline}</li>`;
+        }).join("")}</ul>`;
       }
       if (risks.length) {
         html += `<strong>Key Risks / Blockers</strong><ul>${risks.map(r => `<li>${escapeHtml(typeof r === "string" ? r : JSON.stringify(r))}</li>`).join("")}</ul>`;
