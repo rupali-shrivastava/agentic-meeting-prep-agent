@@ -2,8 +2,8 @@ import express from "express";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import meetingDataSample from "../data/mockData.json" with { type: "json" };
-import { runMeetingAgent } from "../agent/meetingAgent.js";
+import meetingDataSample from "../data/mockData.json" assert { type: "json" };
+import { runMeetingAgent, generateNextAgenda } from "../agent/meetingAgent.js";
 
 const router = express.Router();
 
@@ -46,10 +46,11 @@ async function loadMeetingsFromFolder() {
   }
 }
 
-// GET /meetings -> list all meetings found in daily-standups
+// GET /meetings -> list all meetings, sorted newest first for display
 router.get("/meetings", async (req, res) => {
   try {
     const meetings = await loadMeetingsFromFolder();
+    meetings.sort((a, b) => new Date(b.date) - new Date(a.date));
     res.json(meetings);
   } catch (err) {
     res.status(500).json({ error: "Failed to load meetings", details: String(err) });
@@ -65,6 +66,18 @@ router.post("/prepare", async (req, res) => {
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: "Failed to generate preparation", details: String(err) });
+  }
+});
+
+// POST /prepare/next-agenda -> reads ALL meetings and returns ONE unified next-meeting agenda
+router.post("/prepare/next-agenda", async (req, res) => {
+  try {
+    const meetings = await loadMeetingsFromFolder();
+    if (!meetings.length) return res.status(404).json({ error: "No meeting data found" });
+    const result = await generateNextAgenda(meetings);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to generate next agenda", details: String(err) });
   }
 });
 
