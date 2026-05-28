@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import meetingsRouter from "./routes/meetings.js";
+import { startScheduler } from "./services/scheduler.js";
 
 dotenv.config();
 
@@ -29,4 +30,5 @@ app.post("/send-mail", (req, res, next) => res.redirect(307, "/api/send-mail"));
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
+  startScheduler();
 });

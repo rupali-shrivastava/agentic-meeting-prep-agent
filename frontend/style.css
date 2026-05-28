@@ -169,6 +169,10 @@ details summary { cursor: pointer; font-size: 13px; color: #6b7280; }
   align-items: center;
   margin-bottom: 14px;
 }
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
 
 button {
   padding: 9px 20px;
@@ -183,6 +187,10 @@ button {
 }
 button:hover:not(:disabled) { transform: scale(1.03); opacity: 0.95; }
 button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-secondary {
+  background: linear-gradient(135deg, #059669, #047857);
+}
 
 /* Brief output area */
 #brief {
@@ -251,6 +259,36 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 
 .fu-owner    { color: #fbbf24; }
 .fu-deadline { color: #94a3b8; font-size: 12px; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.toast.success { background: linear-gradient(135deg, #059669, #047857); }
+.toast.error   { background: linear-gradient(135deg, #dc2626, #b91c1c); }
 
 /* Responsive */
 @media (max-width: 900px) {

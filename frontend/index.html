@@ -34,7 +34,10 @@
       <div class="right-panel">
         <div class="right-panel-header">
           <h2>Meeting Brief</h2>
-          <button id="generate-btn" onclick="generateBrief()">Generate Next Agenda</button>
+          <div class="header-actions">
+            <button id="generate-btn" onclick="generateBrief()">Generate Next Agenda</button>
+            <button id="email-btn" class="btn-secondary" onclick="sendEmailBrief()">Send Email Brief</button>
+          </div>
         </div>
         <div id="brief">
           <div class="brief-placeholder">
@@ -62,6 +65,8 @@
     </div>
 
   </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
 
   <script type="module" src="app.js"></script>
 

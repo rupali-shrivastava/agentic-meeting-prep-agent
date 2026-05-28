@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { runMeetingAgent, generateNextAgenda } from "../agent/meetingAgent.js";
 import { sendMeetingSummary } from "../services/mailService.js";
+import { dispatchBriefForType } from "../services/scheduler.js";
 import { MEETING_TYPES } from "../constants/meetingTypes.js";
 
 const router = express.Router();
@@ -84,6 +85,21 @@ router.post("/send-mail", async (req, res) => {
     res.json({ success: true, message: "Email sent successfully" });
   } catch (err) {
     res.status(500).json({ error: "Failed to send email", details: String(err) });
+  }
+});
+
+// POST /send-brief?type=daily-standups — manually trigger email brief (demo / test)
+router.post("/send-brief", async (req, res) => {
+  try {
+    const typeId = req.query.type || "daily-standups";
+    const meetingType = MEETING_TYPES.find(t => t.id === typeId);
+    if (!meetingType) return res.status(400).json({ error: `Unknown meeting type: ${typeId}` });
+    if (!meetingType.time) return res.status(400).json({ error: `No meeting time configured for "${meetingType.label}"` });
+
+    await dispatchBriefForType(meetingType);
+    res.json({ success: true, message: `Brief emailed for "${meetingType.label}"` });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to send brief", details: String(err) });
   }
 });
 

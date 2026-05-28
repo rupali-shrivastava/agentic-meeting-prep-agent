@@ -162,6 +162,14 @@ async function generateBrief() {
   }
 }
 
+function showToast(message, type = "success") {
+  const toast = document.getElementById("toast");
+  toast.textContent = (type === "success" ? "✅  " : "❌  ") + message;
+  toast.className = `toast ${type} show`;
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
+}
+
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -171,7 +179,32 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-// Make generateBrief available globally for onclick
-window.generateBrief = generateBrief;
+async function sendEmailBrief() {
+  const btn = document.getElementById("email-btn");
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+
+  try {
+    const type = selectedType || "daily-standups";
+    const res = await fetch(`${API}/send-brief?type=${encodeURIComponent(type)}`, { method: "POST" });
+    const data = await res.json();
+
+    if (!res.ok) {
+      showToast(data.error || data.details || res.statusText, "error");
+    } else {
+      const label = MEETING_TYPES.find(t => t.id === type)?.label || type;
+      showToast(`Email brief sent for "${label}"`, "success");
+    }
+  } catch (err) {
+    showToast(`Request failed: ${err.message}`, "error");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Send Email Brief";
+  }
+}
+
+// Make functions available globally for onclick
+window.generateBrief  = generateBrief;
+window.sendEmailBrief = sendEmailBrief;
 
 initDropdown();
