@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-16",
   "date": "2026-04-16",
+  "dateTime": "2026-04-16T11:00:00",
   "day": "Thursday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Suresh", "Vikram", "Rahul", "Neha", "Priya", "Ananya", "Rajan"],
+  "participants": [
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" }
+  ],
   "transcript": [
     { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:00", "text": "Rahul — first thing. Redis is still not up. I've been writing the async queue code against a mock but I can't do proper integration testing without real infra. What's the status Vikram?" },
     { "speaker": "Vikram", "role": "DevOps",       "time": "09:01", "text": "Rajan sir's mail went yesterday afternoon. Infra team replied this morning — they said they'll provision Redis by 2pm today. I've been following up since 8am." },

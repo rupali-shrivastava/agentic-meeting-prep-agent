@@ -1,10 +1,17 @@
 {
   "meeting_id": "standup-2026-04-14",
   "date": "2026-04-14",
+  "dateTime": "2026-04-14T11:00:00",
   "day": "Tuesday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Rahul", "Suresh", "Neha", "Priya", "Ananya"],
+  "participants": [
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" }
+  ],
   "transcript": [
     { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:02", "text": "Rajan sir is not joining today — he has a client call. So let's keep this focused. I want to do a quick check first — Priya, yesterday's actions. Effort doc is in progress on my side, sharing by 6pm today as committed. Anything else pending from yesterday?" },
     { "speaker": "Priya",  "role": "PM",           "time": "09:02", "text": "I confirmed the Wednesday client scope call — 11am. Rajan sir is joining. I've also prepared a preliminary agenda. That's done." },

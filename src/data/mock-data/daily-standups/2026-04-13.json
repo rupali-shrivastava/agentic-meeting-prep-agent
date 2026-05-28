@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-13",
   "date": "2026-04-13",
+  "dateTime": "2026-04-13T11:00:00",
   "day": "Monday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Suresh", "Neha", "Rahul", "Ananya", "Rajan", "Vikram"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "09:05", "text": "Good morning everyone. First thing — how was the weekend? Any prod issues?" },
     { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:05", "text": "Clean. 3 actual transactions came through on Saturday. All 3 successful. The 2 intermittent cases we were worried about — neither of them triggered over the weekend." },

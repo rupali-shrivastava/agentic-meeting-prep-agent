@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-06",
   "date": "2026-04-06",
+  "dateTime": "2026-04-06T11:00:00",
   "day": "Monday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Rahul", "Vikram", "Neha", "Suresh", "Ananya", "Rajan"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "09:01", "text": "Good morning everyone. Okay so this is go-live week. Payment API is supposed to go live by Wednesday EOD as per the plan. Rahul, let's start with you — where are we?" },
     { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:02", "text": "So API development is done on our side. The code is ready, reviewed, merged. But the staging environment is still pointing to old DB config from last sprint. Vikram was supposed to fix this Friday but I don't think it happened." },

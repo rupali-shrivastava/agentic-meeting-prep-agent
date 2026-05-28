@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-07",
   "date": "2026-04-07",
+  "dateTime": "2026-04-07T11:00:00",
   "day": "Tuesday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Rahul", "Suresh", "Neha", "Vikram", "Ananya", "Rajan"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "09:01", "text": "Morning everyone. Okay let me start by closing yesterday's action items before we go into new stuff. Vikram — env got fixed at what time yesterday?" },
     { "speaker": "Vikram", "role": "DevOps",       "time": "09:01", "text": "Infra applied the config at 1:20pm. I confirmed it at 1:30 and pinged Neha immediately." },

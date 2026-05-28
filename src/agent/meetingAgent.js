@@ -71,7 +71,9 @@ function buildMultiMeetingPrompt(meetings = []) {
       ? rawTranscript.map(t => `  [${t.time || ""}] ${t.speaker}${t.role ? ` (${t.role})` : ""}: ${t.text}`).join("\n")
       : String(rawTranscript);
 
-    const participants = Array.isArray(m.participants) ? m.participants.join(", ") : m.participants || "";
+    const participants = Array.isArray(m.participants)
+      ? m.participants.map(p => typeof p === "object" ? p.name : p).join(", ")
+      : m.participants || "";
 
     return `--- Meeting ${i + 1}: ${m.date || ""}${m.day ? ` (${m.day})` : ""} | ${m.project || ""} ${m.sprint ? `| ${m.sprint}` : ""} ---
 Participants: ${participants}
@@ -169,7 +171,7 @@ function buildPrompt(meeting = {}) {
     : String(rawTranscript);
 
   const participants = Array.isArray(meeting.participants)
-    ? meeting.participants.join(", ")
+    ? meeting.participants.map(p => typeof p === "object" ? `${p.name} (${p.role})` : p).join(", ")
     : meeting.participants || "Unknown participants";
 
   const pendingActions = Array.isArray(meeting.pendingActions)

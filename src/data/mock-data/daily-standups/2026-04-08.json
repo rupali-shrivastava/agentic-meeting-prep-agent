@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-08",
   "date": "2026-04-08",
+  "dateTime": "2026-04-08T11:00:00",
   "day": "Wednesday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Rajan", "Priya", "Vikram", "Rahul", "Neha", "Ananya", "Suresh"],
+  "participants": [
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" },
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" }
+  ],
   "transcript": [
     { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "08:55", "text": "Before we start the usual standup — yesterday's demo did not go well. I want to understand what happened. Client saw the error screen during the payment flow. Their team is upset and BU head is now cc'd on all communication." },
     { "speaker": "Priya",  "role": "PM",           "time": "08:56", "text": "Sir, I'm sorry about that. What happened was — Suresh deployed the timeout fix and retry logic to staging-v2. Neha ran the tests on staging-v2 and they passed. But the demo environment the client was looking at was staging-v1. The fix never reached that environment." },

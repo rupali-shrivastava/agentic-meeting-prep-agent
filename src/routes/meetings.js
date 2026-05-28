@@ -2,55 +2,47 @@ import express from "express";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import meetingDataSample from "../data/mockData.json" with { type: "json" };
-import { runMeetingAgent } from "../agent/meetingAgent.js";
+import { runMeetingAgent, generateNextAgenda } from "../agent/meetingAgent.js";
 import { sendMeetingSummary } from "../services/mailService.js";
+import { MEETING_TYPES } from "../constants/meetingTypes.js";
 
 const router = express.Router();
 
-// Helper to load all JSON meeting files from data/mock-data/daily-standups
-async function loadMeetingsFromFolder() {
+const VALID_FOLDERS = new Set(MEETING_TYPES.map(t => t.folder));
+
+async function loadMeetingsFromFolder(type = "daily-standups") {
+  const folder = VALID_FOLDERS.has(type) ? type : "daily-standups";
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const folder = path.join(__dirname, "..", "data", "mock-data", "daily-standups");
+  const folderPath = path.join(__dirname, "..", "data", "mock-data", folder);
 
   try {
-    const files = await fs.readdir(folder);
+    const files = await fs.readdir(folderPath);
     const meetings = [];
 
     for (const file of files) {
       if (!file.endsWith(".json")) continue;
       try {
-        const content = await fs.readFile(path.join(folder, file), "utf8");
+        const content = await fs.readFile(path.join(folderPath, file), "utf8");
         const parsed = JSON.parse(content);
-        if (Array.isArray(parsed)) {
-          meetings.push(...parsed);
-        } else if (parsed && typeof parsed === "object") {
-          meetings.push(parsed);
-        }
+        if (Array.isArray(parsed)) meetings.push(...parsed);
+        else if (parsed && typeof parsed === "object") meetings.push(parsed);
       } catch (e) {
-        // skip invalid files but continue
         console.warn(`Failed to parse ${file}:`, e.message || e);
       }
     }
 
-    // Fallback to sample mockData.json if folder is empty
-    if (meetings.length === 0 && Array.isArray(meetingDataSample)) {
-      return meetingDataSample;
-    }
-
     return meetings;
   } catch (e) {
-    // If folder doesn't exist or can't be read, return sample data
-    console.warn("Could not read mock-standups folder, falling back to sample mockData.json", e.message || e);
-    return meetingDataSample;
+    return [];
   }
 }
 
-// GET /meetings -> list all meetings, sorted newest first for display
+// GET /meetings?type=daily-standups — sorted newest first
 router.get("/meetings", async (req, res) => {
   try {
-    const meetings = await loadMeetingsFromFolder();
+    const type = req.query.type || "daily-standups";
+    const meetings = await loadMeetingsFromFolder(type);
     meetings.sort((a, b) => new Date(b.date) - new Date(a.date));
     res.json(meetings);
   } catch (err) {
@@ -58,23 +50,13 @@ router.get("/meetings", async (req, res) => {
   }
 });
 
-// POST /prepare -> generate preparation for a single meeting object
-router.post("/prepare", async (req, res) => {
+// POST /prepare/batch — accepts array of transcripts, returns one unified next-meeting agenda
+router.post("/prepare/batch", async (req, res) => {
   try {
-    const meeting = req.body;
-    if (!meeting) return res.status(400).json({ error: "Missing meeting in request body" });
-    const result = await runMeetingAgent(meeting);
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to generate preparation", details: String(err) });
-  }
-});
-
-// POST /prepare/next-agenda -> reads ALL meetings and returns ONE unified next-meeting agenda
-router.post("/prepare/next-agenda", async (req, res) => {
-  try {
-    const meetings = await loadMeetingsFromFolder();
-    if (!meetings.length) return res.status(404).json({ error: "No meeting data found" });
+    const meetings = req.body;
+    if (!Array.isArray(meetings) || meetings.length === 0) {
+      return res.status(400).json({ error: "Expected a non-empty array of meeting transcripts" });
+    }
     const result = await generateNextAgenda(meetings);
     res.json(result);
   } catch (err) {
@@ -82,64 +64,26 @@ router.post("/prepare/next-agenda", async (req, res) => {
   }
 });
 
-// POST /prepare/batch -> generate for array of meetings
-router.post("/prepare/batch", async (req, res) => {
-  try {
-    const meetings = req.body;
-    if (!Array.isArray(meetings)) return res.status(400).json({ error: "Expected an array of meetings" });
-    const result = await runMeetingAgent(meetings);
-    res.json(result);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to generate batch preparation", details: String(err) });
-  }
-});
-
-// POST /send-mail -> generate preparation and send email summary
+// POST /send-mail — generate preparation for a single meeting and email the summary
 router.post("/send-mail", async (req, res) => {
   try {
     const { meeting, emails } = req.body;
 
-    if (!meeting) {
-      return res.status(400).json({
-        error: "Meeting is required"
-      });
-    }
-
-    if (!emails || !emails.length) {
-      return res.status(400).json({
-        error: "Recipient emails are required"
-      });
-    }
+    if (!meeting) return res.status(400).json({ error: "Meeting is required" });
+    if (!emails || !emails.length) return res.status(400).json({ error: "Recipient emails are required" });
 
     const result = await runMeetingAgent(meeting);
-
-    console.log("Generated preparation result:", result);
-
     const prep = result.preparation || {};
 
-    const html = `
-      <h2>Meeting Summary</h2>
-      <p>${prep.summary || ""}</p>
-    `;
-    
     await sendMeetingSummary({
       to: emails,
       subject: `Meeting Summary - ${meeting.project || "Meeting"}`,
-      html
+      html: `<h2>Meeting Summary</h2><p>${prep.summary || ""}</p>`
     });
 
-    res.json({
-      success: true,
-      message: "Email sent successfully"
-    });
-
+    res.json({ success: true, message: "Email sent successfully" });
   } catch (err) {
-    console.error(err);
-
-    res.status(500).json({
-      error: "Failed to send email",
-      details: String(err)
-    });
+    res.status(500).json({ error: "Failed to send email", details: String(err) });
   }
 });
 
