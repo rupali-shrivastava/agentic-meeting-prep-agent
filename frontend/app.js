@@ -156,17 +156,36 @@ async function generateBrief() {
 
     briefEl.innerHTML = html;
 
-    // Auto-send email to all participants after brief is rendered
+    // Auto-send email — reuse the already-generated prep (no second AI call)
     try {
-      const emailRes = await fetch(`${API}/send-brief?type=${encodeURIComponent(selectedType || "daily-standups")}`, { method: "POST" });
+      const latest       = meetingsData[0] || {};
+      const participants = [...new Map(
+        meetingsData.flatMap(m => Array.isArray(m.participants) ? m.participants : [])
+          .filter(p => p && p.email)
+          .map(p => [p.email, { name: p.name, email: p.email }])
+      ).values()];
+
+      const emailRes = await fetch(
+        `${API}/send-brief?type=${encodeURIComponent(selectedType || "daily-standups")}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            prep,
+            project: latest.project || "",
+            participants,
+          }),
+        }
+      );
       const emailData = await emailRes.json();
       if (emailRes.ok) {
-        showToast("Brief generated & emails sent to all participants");
+        showToast(`Brief generated & emails sent to ${participants.length} participants`);
       } else {
         showToast(emailData.error || "Brief generated but email failed", "error");
       }
-    } catch {
+    } catch (err) {
       showToast("Brief generated but email could not be sent", "error");
+      console.error("[send-brief]", err);
     }
 
   } catch (err) {

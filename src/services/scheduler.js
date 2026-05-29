@@ -81,6 +81,18 @@ function getNextMeetingDate(meetingType) {
   return null;
 }
 
+export function getNextMeetingDateForType(meetingType) {
+  return getNextMeetingDate(meetingType);
+}
+
+export function formatDateLabel(date) {
+  return formatDate(date);
+}
+
+export function formatTimeLabel(time) {
+  return formatTime(time);
+}
+
 function formatDate(date) {
   return date.toLocaleDateString("en-IN", {
     timeZone: "Asia/Kolkata",
