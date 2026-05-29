@@ -20,6 +20,7 @@ function initDropdown() {
     document.getElementById("meetings-heading").textContent = `Meetings – ${label}`;
     document.getElementById("main-layout").style.display = "grid";
     document.getElementById("empty-state").style.display = "none";
+    document.getElementById("generate-btn").style.display = "none";
     document.getElementById("brief").innerHTML = `
       <div class="brief-placeholder">
         <span class="placeholder-icon">📋</span>
@@ -46,10 +47,10 @@ async function loadMeetings(type) {
           <p style="font-weight:600;color:#374151;font-size:15px;margin:0">No meetings found</p>
           <p style="font-size:13px;margin:0;max-width:220px">There are no recorded meetings for this type yet.</p>
         </div>`;
-      document.getElementById("generate-btn").disabled = true;
+      document.getElementById("generate-btn").style.display = "none";
       return;
     }
-    document.getElementById("generate-btn").disabled = false;
+    document.getElementById("generate-btn").style.display = "";
 
     data.forEach((meeting, index) => {
       const div = document.createElement("div");
@@ -154,6 +155,20 @@ async function generateBrief() {
     }
 
     briefEl.innerHTML = html;
+
+    // Auto-send email to all participants after brief is rendered
+    try {
+      const emailRes = await fetch(`${API}/send-brief?type=${encodeURIComponent(selectedType || "daily-standups")}`, { method: "POST" });
+      const emailData = await emailRes.json();
+      if (emailRes.ok) {
+        showToast("Brief generated & emails sent to all participants");
+      } else {
+        showToast(emailData.error || "Brief generated but email failed", "error");
+      }
+    } catch {
+      showToast("Brief generated but email could not be sent", "error");
+    }
+
   } catch (err) {
     briefEl.innerHTML = `<span style="color:#f87171">Request failed: ${escapeHtml(err.message || String(err))}</span>`;
   } finally {
@@ -179,32 +194,7 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-async function sendEmailBrief() {
-  const btn = document.getElementById("email-btn");
-  btn.disabled = true;
-  btn.textContent = "Sending...";
-
-  try {
-    const type = selectedType || "daily-standups";
-    const res = await fetch(`${API}/send-brief?type=${encodeURIComponent(type)}`, { method: "POST" });
-    const data = await res.json();
-
-    if (!res.ok) {
-      showToast(data.error || data.details || res.statusText, "error");
-    } else {
-      const label = MEETING_TYPES.find(t => t.id === type)?.label || type;
-      showToast(`Email brief sent for "${label}"`, "success");
-    }
-  } catch (err) {
-    showToast(`Request failed: ${err.message}`, "error");
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Send Email Brief";
-  }
-}
-
-// Make functions available globally for onclick
-window.generateBrief  = generateBrief;
-window.sendEmailBrief = sendEmailBrief;
+// Make generateBrief available globally for onclick
+window.generateBrief = generateBrief;
 
 initDropdown();

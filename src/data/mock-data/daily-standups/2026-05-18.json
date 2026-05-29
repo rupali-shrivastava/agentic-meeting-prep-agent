@@ -1,0 +1,38 @@
+{
+  "meeting_id": "standup-2026-05-18",
+  "date": "2026-05-18",
+  "dateTime": "2026-05-18T11:00:00",
+  "day": "Monday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": [
+    { "name": "Rupali",  "email": "rupali.shrivastava@beyondkey.com",  "role": "PM" },
+    { "name": "Rakesh",  "email": "rakesh.bhargava@beyondkey.com",  "role": "Tech Lead" },
+    { "name": "Vivek", "email": "vivek.verma@beyondkey.com", "role": "DevOps" },
+    { "name": "Ajay",   "email": "ajay.jangam@beyondkey.com",   "role": "QA Lead" },
+    { "name": "Varsha", "email": "varsha.goutam@beyondkey.com", "role": "Backend Dev" },
+    { "name": "Suraj", "email": "suraj.mane@beyondkey.com", "role": "Frontend Dev" },
+    { "name": "Vinod",  "email": "vinod.tiwari@beyondkey.com",  "role": "Delivery Mgr" }
+  ],
+  "transcript": [
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:01", "text": "Good morning everyone. Okay so this is go-live week. Payment API is supposed to go live by Wednesday EOD as per the plan. Rakesh, let's start with you — where are we?" },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:02", "text": "So API development is done on our side. The code is ready, reviewed, merged. But the staging environment is still pointing to old DB config from last sprint. Vivek was supposed to fix this Friday but I don't think it happened." },
+    { "speaker": "Vivek", "role": "DevOps",       "time": "09:02", "text": "I did fix it on Friday. I updated the config and raised the infra ticket. But central infra team needs to apply it on their end. I followed up Friday evening, no response yet." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:03", "text": "Okay, so until infra applies it, Ajay's team can't even connect to staging. Is that correct Ajay?" },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:03", "text": "Yes. We tried connecting Friday afternoon, 3-4 times. Connection timeout every single time. So right now we have zero test coverage on the payment flow. Nothing." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:04", "text": "Vivek can you ping infra right now on Teams? Like right now during this call? We need this today." },
+    { "speaker": "Vivek", "role": "DevOps",       "time": "09:04", "text": "Yes pinging. One second..." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:05", "text": "What's the overall situation Rupali. Give me the full picture." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:06", "text": "Sir, staging environment is blocked since Friday — infra config issue. Vivek has done his part, it's with central infra now. We're pushing for resolution by 11am today. Once that's done Ajay can start testing." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:06", "text": "Client called me this morning. They are expecting go-live Wednesday. They've already told their internal team. If we slip that date they will escalate to the BU head. Let's make sure that doesn't happen." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:07", "text": "Rakesh one thing I wanted to flag — the payment gateway sandbox credentials. Client sent them last Tuesday but I realized I haven't verified if we're hitting the correct endpoint. The doc they sent has two URLs and I'm not sure which one is for sandbox." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:08", "text": "Varsha that needs to be sorted today itself. If we're hitting the wrong endpoint everything will fail even after env is fixed." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:08", "text": "Yes I'll verify. I'll also share the API response schema with Suraj today. She was waiting on it." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:09", "text": "Yes please. I have the payment confirmation page mostly done but I can't finalize the field mapping without the actual response structure. Also there's a small alignment issue on mobile view — I'll fix that today, maybe 2 hours max." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:10", "text": "Okay. So to summarize action items — Vivek follow up with infra, we need env by 11am. Varsha verify gateway endpoint and share schema with Suraj by 12pm. Ajay keep test cases ready so the moment env is up we start running. Suraj fix the mobile alignment." },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:11", "text": "34 test cases are ready. I just need the environment. The moment it's up I'll start." },
+    { "speaker": "Vivek", "role": "DevOps",       "time": "09:11", "text": "Infra guy just replied. He says he'll apply the config by 10:30. I'll confirm once it's done." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:12", "text": "Good. Rupali I want a status message in the group by 12pm — env status, testing started or not, any blockers. Don't wait for tomorrow's standup." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:12", "text": "Will do sir." }
+  ]
+}
