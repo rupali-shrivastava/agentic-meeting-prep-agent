@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-15",
   "date": "2026-04-15",
+  "dateTime": "2026-04-15T11:00:00",
   "day": "Wednesday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Rajan", "Rahul", "Suresh", "Vikram", "Neha", "Ananya"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "11:35", "text": "Okay team — quick debrief from the client scope call that just ended. Rajan sir, do you want to start?" },
     { "speaker": "Rajan",  "role": "Delivery Mgr", "time": "11:36", "text": "I'll give the summary. They pushed back initially — as expected. But Rahul's effort document was very detailed and well structured. I showed it to them and they couldn't dispute the numbers. Credit to Rahul for that." },

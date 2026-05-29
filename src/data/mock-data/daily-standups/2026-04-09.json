@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-09",
   "date": "2026-04-09",
+  "dateTime": "2026-04-09T11:00:00",
   "day": "Thursday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Vikram", "Rahul", "Priya", "Neha", "Suresh", "Ananya", "Rajan"],
+  "participants": [
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" }
+  ],
   "transcript": [
     { "speaker": "Vikram", "role": "DevOps",       "time": "09:00", "text": "Team, before anything else — I need to share something I found last night. Prod environment has a completely different SSL certificate configuration than staging. The cert authority is different. Our payment API calls will fail the moment we try to hit prod." },
     { "speaker": "Rahul",  "role": "Tech Lead",    "time": "09:01", "text": "Vikram... what. We've been testing on staging for 3 days. How is prod different?" },

@@ -4,39 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meeting Prep Agent</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
   <div class="container">
 
     <header class="header">
       <h1>📊 Office Meeting Prep Agent</h1>
-      <p>AI-powered meeting summaries & action tracking</p>
+      <p>AI-powered meeting summaries &amp; action tracking</p>
     </header>
 
-    <div class="layout">
+    <!-- Meeting type selector -->
+    <div class="selector-bar">
+      <label for="meeting-type">Select Meeting Type</label>
+      <select id="meeting-type">
+        <option value="" disabled selected>— Choose a meeting type —</option>
+      </select>
+    </div>
+
+    <!-- Main layout (hidden until type selected) -->
+    <div class="layout" id="main-layout" style="display:none">
 
       <div class="left-panel">
-        <h2>Meetings</h2>
+        <h2 id="meetings-heading">Meetings</h2>
         <div id="meetings"></div>
       </div>
 
       <div class="right-panel">
         <div class="right-panel-header">
           <h2>Meeting Brief</h2>
-          <button id="generate-btn" onclick="generateBrief()">Generate Next Agenda</button>
+          <div class="header-actions">
+            <button id="generate-btn" onclick="generateBrief()">Generate Next Agenda</button>
+            <button id="email-btn" class="btn-secondary" onclick="sendEmailBrief()">Send Email Brief</button>
+          </div>
         </div>
-        <div id="brief">Select a meeting from the left to generate a brief.</div>
+        <div id="brief">
+          <div class="brief-placeholder">
+            <span class="placeholder-icon">📋</span>
+            <p>Click <strong>Generate Next Agenda</strong> to get an AI-powered brief based on all meeting history.</p>
+          </div>
+        </div>
       </div>
 
     </div>
 
+    <!-- Initial empty state (shown before type is selected) -->
+    <div id="empty-state" class="empty-state">
+      <div class="empty-state-card">
+        <div class="empty-icon">🗓️</div>
+        <h2>Welcome to Meeting Prep Agent</h2>
+        <p>Select a meeting type above to load meeting history and generate your next meeting agenda using AI.</p>
+        <ul class="feature-list">
+          <li>📝 Reads all past meeting transcripts</li>
+          <li>🤖 Powered by Azure OpenAI</li>
+          <li>📌 Generates agenda, prep points &amp; follow-ups</li>
+          <li>⚠️ Surfaces key risks and blockers</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-  <script src="app.js"></script>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
 
 </body>
 </html>

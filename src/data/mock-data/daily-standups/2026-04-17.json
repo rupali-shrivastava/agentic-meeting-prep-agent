@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-17",
   "date": "2026-04-17",
+  "dateTime": "2026-04-17T11:00:00",
   "day": "Friday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Suresh", "Vikram", "Neha", "Rahul", "Ananya", "Rajan"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "09:00", "text": "Good morning. Last standup before UAT. Let's go around quickly. Suresh — async queue?" },
     { "speaker": "Suresh", "role": "Backend Dev",  "time": "09:01", "text": "Done. Redis came up at 2:15pm yesterday as Vikram promised. I switched from mock immediately, finished the consumer logic and retry scheduler by 9pm, deployed to prod at 10:30pm. I ran manual end-to-end tests this morning — payment forward, payment failure, refund initiation. All three flows are going through the queue correctly." },

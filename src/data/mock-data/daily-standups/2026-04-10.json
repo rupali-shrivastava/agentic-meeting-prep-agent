@@ -1,10 +1,19 @@
 {
   "meeting_id": "standup-2026-04-10",
   "date": "2026-04-10",
+  "dateTime": "2026-04-10T11:00:00",
   "day": "Friday",
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
-  "participants": ["Priya", "Neha", "Rahul", "Suresh", "Rajan", "Ananya", "Vikram"],
+  "participants": [
+    { "name": "Priya",  "email": "priya@yopmail.com",  "role": "PM" },
+    { "name": "Neha",   "email": "neha@yopmail.com",   "role": "QA Lead" },
+    { "name": "Rahul",  "email": "rahul@yopmail.com",  "role": "Tech Lead" },
+    { "name": "Suresh", "email": "suresh@yopmail.com", "role": "Backend Dev" },
+    { "name": "Rajan",  "email": "rajan@yopmail.com",  "role": "Delivery Mgr" },
+    { "name": "Ananya", "email": "ananya@yopmail.com", "role": "Frontend Dev" },
+    { "name": "Vikram", "email": "vikram@yopmail.com", "role": "DevOps" }
+  ],
   "transcript": [
     { "speaker": "Priya",  "role": "PM",           "time": "08:45", "text": "Good morning. Okay it's Friday. Go-live day. Neha you were running tests last night — tell us." },
     { "speaker": "Neha",   "role": "QA Lead",      "time": "08:46", "text": "So SSL got fixed at 11:15pm. I started running on prod immediately. Ran till about 1:30am. Results — 30 out of 34 passing on prod. 4 failing." },
