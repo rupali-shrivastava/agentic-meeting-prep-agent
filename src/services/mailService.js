@@ -6,7 +6,7 @@ export async function sendMeetingSummary({ to, subject, html }) {
 }
 
 // Sends a personalised email to each participant individually
-export async function sendMeetingBrief({ participants, meetingType, meetingTime, project, prep }) {
+export async function sendMeetingBrief({ participants, meetingType, meetingDate, meetingTime, project, prep }) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   const {
@@ -46,14 +46,15 @@ export async function sendMeetingBrief({ participants, meetingType, meetingTime,
       <td bgcolor="#1e3a8a" style="background-color:#1e3a8a;padding:28px 32px">
         <p style="margin:0 0 4px;font-size:12px;color:#93c5fd;text-transform:uppercase;letter-spacing:0.06em;font-family:'Segoe UI',Arial,sans-serif">Meeting Brief</p>
         <h1 style="margin:0 0 8px;font-size:24px;font-weight:700;color:#ffffff;font-family:'Segoe UI',Arial,sans-serif">${meetingType}</h1>
-        <p style="margin:0;font-size:13px;color:#bfdbfe;font-family:'Segoe UI',Arial,sans-serif">${project} &nbsp;&middot;&nbsp; Today at ${meetingTime} &nbsp;&middot;&nbsp; 15 min reminder</p>
+        <p style="margin:0;font-size:13px;color:#bfdbfe;font-family:'Segoe UI',Arial,sans-serif">${project} &nbsp;&middot;&nbsp; ${meetingDate} &nbsp;&middot;&nbsp; ${meetingTime}</p>
+        <p style="margin:4px 0 0;font-size:11px;color:#93c5fd;font-family:'Segoe UI',Arial,sans-serif">This brief was sent 15 minutes before the meeting</p>
       </td>
     </tr>
 
     <!-- Greeting -->
     <tr>
       <td style="padding:28px 32px 8px;font-family:'Segoe UI',Arial,sans-serif">
-        <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">Hi <strong>${name}</strong>,<br/>Here is your upcoming meeting brief to help you prepare for today's <strong>${meetingType}</strong>.</p>
+        <p style="margin:0;font-size:15px;color:#111827;line-height:1.6">Hi <strong>${name}</strong>,<br/>Here is your meeting brief to help you prepare for the upcoming <strong>${meetingType}</strong> on <strong>${meetingDate}</strong> at <strong>${meetingTime}</strong>.</p>
       </td>
     </tr>
 
@@ -86,7 +87,7 @@ export async function sendMeetingBrief({ participants, meetingType, meetingTime,
     sgMail.send({
       to: email,
       from: process.env.SENDGRID_FROM,
-      subject: `📋 Meeting Brief: ${meetingType} — Today at ${meetingTime}`,
+      subject: `📋 Meeting Brief: ${meetingType} — ${meetingDate} at ${meetingTime}`,
       html: buildHtml(name),
     })
   );

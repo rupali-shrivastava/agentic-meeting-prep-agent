@@ -169,10 +169,6 @@ details summary { cursor: pointer; font-size: 13px; color: #6b7280; }
   align-items: center;
   margin-bottom: 14px;
 }
-.header-actions {
-  display: flex;
-  gap: 8px;
-}
 
 button {
   padding: 9px 20px;
@@ -187,10 +183,6 @@ button {
 }
 button:hover:not(:disabled) { transform: scale(1.03); opacity: 0.95; }
 button:disabled { opacity: 0.55; cursor: not-allowed; }
-
-.btn-secondary {
-  background: linear-gradient(135deg, #059669, #047857);
-}
 
 /* Brief output area */
 #brief {

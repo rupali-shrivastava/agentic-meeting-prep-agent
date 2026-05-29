@@ -88,7 +88,8 @@ router.post("/send-mail", async (req, res) => {
   }
 });
 
-// POST /send-brief?type=daily-standups — manually trigger email brief (demo / test)
+// POST /send-brief?type=daily-standups — send already-generated brief via email (no second AI call)
+// Body: { prep, project, participants }
 router.post("/send-brief", async (req, res) => {
   try {
     const typeId = req.query.type || "daily-standups";
@@ -96,9 +97,19 @@ router.post("/send-brief", async (req, res) => {
     if (!meetingType) return res.status(400).json({ error: `Unknown meeting type: ${typeId}` });
     if (!meetingType.time) return res.status(400).json({ error: `No meeting time configured for "${meetingType.label}"` });
 
-    await dispatchBriefForType(meetingType);
+    const { prep, project, participants } = req.body;
+    if (!prep) return res.status(400).json({ error: "Missing prep data in request body" });
+
+    const { getNextMeetingDateForType, formatDateLabel, formatTimeLabel } = await import("../services/scheduler.js");
+    const nextDate     = getNextMeetingDateForType(meetingType);
+    const meetingDate  = nextDate ? formatDateLabel(nextDate) : "Upcoming";
+    const meetingTime  = formatTimeLabel(meetingType.time);
+
+    await sendMeetingBrief({ participants, meetingType: meetingType.label, meetingDate, meetingTime, project, prep });
+
     res.json({ success: true, message: `Brief emailed for "${meetingType.label}"` });
   } catch (err) {
+    console.error("[send-brief]", err);
     res.status(500).json({ error: "Failed to send brief", details: String(err) });
   }
 });

@@ -1,0 +1,43 @@
+{
+  "meeting_id": "standup-2026-05-19",
+  "date": "2026-05-19",
+  "dateTime": "2026-05-19T11:00:00",
+  "day": "Tuesday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": [
+    { "name": "Rupali",  "email": "rupali.shrivastava@beyondkey.com",  "role": "PM" },
+    { "name": "Rakesh",  "email": "rakesh.bhargava@beyondkey.com",  "role": "Tech Lead" },
+    { "name": "Varsha", "email": "varsha.goutam@beyondkey.com", "role": "Backend Dev" },
+    { "name": "Ajay",   "email": "ajay.jangam@beyondkey.com",   "role": "QA Lead" },
+    { "name": "Vivek", "email": "vivek.verma@beyondkey.com", "role": "DevOps" },
+    { "name": "Suraj", "email": "suraj.mane@beyondkey.com", "role": "Frontend Dev" },
+    { "name": "Vinod",  "email": "vinod.tiwari@beyondkey.com",  "role": "Delivery Mgr" }
+  ],
+  "transcript": [
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:01", "text": "Morning everyone. Okay let me start by closing yesterday's action items before we go into new stuff. Vivek — env got fixed at what time yesterday?" },
+    { "speaker": "Vivek", "role": "DevOps",       "time": "09:01", "text": "Infra applied the config at 1:20pm. I confirmed it at 1:30 and pinged Ajay immediately." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:02", "text": "Good. Varsha — gateway endpoint and schema, did that go to Suraj?" },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:02", "text": "Yes. Endpoint verified — we were using the wrong URL actually. I fixed it and shared the corrected schema with Suraj around 2pm." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:03", "text": "Got it and updated the field mapping. Mobile alignment is also fixed. That's done." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:03", "text": "Okay good. Now Ajay — you messaged at midnight. What's happening?" },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:04", "text": "So I started running the test suite from 2pm yesterday. The environment is up but we're getting random timeouts on the payment initiation call. Not every time — roughly 1 in 5 requests is timing out. It's very inconsistent, which is why I kept running till late to see if it was a pattern." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:05", "text": "1 in 5 is basically 20% failure rate. That's not acceptable for go-live. Varsha, any idea what's causing it?" },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:05", "text": "I think I know. Our timeout config is set to 3 seconds. But yesterday when I was reading the gateway integration doc properly — their SLA says the first authentication call can take up to 8 seconds sometimes. We've been setting an unrealistically short timeout." },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:06", "text": "See! I said yesterday also it didn't feel like an infra issue. The pattern was not random — it was happening more on the first call in a session." },
+    { "speaker": "Vivek", "role": "DevOps",       "time": "09:06", "text": "Yes I also didn't think it was infra side. The connection is stable. 3 second timeout is application level config, that's Varsha's side." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:07", "text": "I'm changing it to 10 seconds right now. But there's also another issue — we have no retry logic. If the call times out, the error just gets thrown directly to frontend. User sees nothing useful." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:07", "text": "Yes, right now it's a blank red screen. I added a generic error message last night but it's not good enough. We need proper retry with user feedback — like 'processing, please wait'." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:08", "text": "How long to fix both of these properly?" },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:09", "text": "Timeout change is 30 minutes. Basic retry — Varsha maybe 2-3 hours? Proper graceful handling with UI feedback — end of day." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:09", "text": "Yes that's about right." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:10", "text": "Client wants a demo today at 3pm. They called this morning and asked. Can we show them something?" },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:10", "text": "Sir we can do a controlled demo. We run only the happy path — the scenarios that are passing. We don't show the edge cases. But I want to be honest with you — it is not fully production ready yet." },
+    { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "09:11", "text": "Okay. Do the demo carefully. Rakesh — this retry issue needs to be done today. Not tomorrow. Wednesday go-live is still the target." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:11", "text": "Understood. Varsha, Suraj — can we do a war room after this call? The three of us, just finish it together." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:12", "text": "Let me check calendar... yes I'm free." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:12", "text": "Same. I'll keep the error handling code open." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:13", "text": "Ajay — can you rerun the happy path suite before 2:30pm so we have fresh results for the demo? Just the passing scenarios." },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:13", "text": "Yes. Once Varsha deploys the timeout fix I'll rerun. Will share results by 2pm." }
+  ]
+}

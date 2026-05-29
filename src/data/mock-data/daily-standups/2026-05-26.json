@@ -1,0 +1,37 @@
+{
+  "meeting_id": "standup-2026-05-26",
+  "date": "2026-05-26",
+  "dateTime": "2026-05-26T11:00:00",
+  "day": "Tuesday",
+  "project": "Project Phoenix",
+  "sprint": "Sprint 4",
+  "participants": [
+    { "name": "Rakesh",  "email": "rakesh.bhargava@beyondkey.com",  "role": "Tech Lead" },
+    { "name": "Varsha", "email": "varsha.goutam@beyondkey.com", "role": "Backend Dev" },
+    { "name": "Ajay",   "email": "ajay.jangam@beyondkey.com",   "role": "QA Lead" },
+    { "name": "Rupali",  "email": "rupali.shrivastava@beyondkey.com",  "role": "PM" },
+    { "name": "Suraj", "email": "suraj.mane@beyondkey.com", "role": "Frontend Dev" }
+  ],
+  "transcript": [
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:02", "text": "Vinod sir is not joining today — he has a client call. So let's keep this focused. I want to do a quick check first — Rupali, yesterday's actions. Effort doc is in progress on my side, sharing by 6pm today as committed. Anything else pending from yesterday?" },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:02", "text": "I confirmed the Wednesday client scope call — 11am. Vinod sir is joining. I've also prepared a preliminary agenda. That's done." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:03", "text": "Good. Now — even before scope is finalized, I want to start thinking through the returns flow design. So that Wednesday we can speak confidently about the approach, not just the timeline." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:04", "text": "Sure. So for refunds, we hit the payment gateway's refund endpoint. Standard flow. But Rakesh — I've been thinking about this since yesterday. Remember on Day 3 we descoped the gateway-down fallback scenario? We said it's out of scope for Sprint 4?" },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:05", "text": "Yes." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:05", "text": "For the payment forward flow, descoping it was acceptable. If payment fails, user can try again. It's annoying but recoverable. But for refunds — if the gateway is down at the moment of refund and we have no fallback, the refund silently fails. Customer has returned the product but hasn't got their money back. That's a serious problem." },
+    { "speaker": "Ajay",   "role": "QA Lead",      "time": "09:06", "text": "That's a customer support nightmare. They'll raise a dispute with the bank. Client will get chargebacks." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:07", "text": "So the async retry queue we didn't build in Sprint 4 — we actually need to build it now, for Sprint 5, before we even start returns flow." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:08", "text": "Yes. And honestly — and I know this is uncomfortable to say — the 2 intermittent failures Ajay saw in prod on Friday? The root cause is the same thing. We have no retry mechanism for payment forward either. We've been lucky that only 3 real transactions happened over the weekend and none hit the bad scenario." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:09", "text": "Wait. So we have a known prod weakness in Sprint 4 that could cause a payment failure, AND Sprint 5 returns flow depends on fixing that same weakness first?" },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:09", "text": "That's exactly correct." },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:10", "text": "Rakesh this has to be in the document you're preparing for tomorrow. Clearly. Not buried. If something fails in prod and it comes out that we knew about this risk and didn't surface it formally — that is very bad for us." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:11", "text": "Agreed. Varsha, let's write a technical risk document today alongside the effort doc. You write the technical detail — root cause, probability, impact. I'll write the business risk framing and proposed fix." },
+    { "speaker": "Varsha", "role": "Backend Dev",  "time": "09:12", "text": "Yes. I'll have my part done by 4pm." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:13", "text": "For the returns UI — Rakesh, is it a new page or part of the existing checkout flow? I need to know for my estimation." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:14", "text": "Separate flow. User goes to order history, selects order, initiates return. Minimum 3 screens — order lookup, return reason selection, confirmation with refund amount." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:14", "text": "And admin dashboard — any mockup from client?" },
+    { "speaker": "Rupali",  "role": "PM",           "time": "09:15", "text": "Nothing. They said standard admin dashboard. Which tells us absolutely nothing." },
+    { "speaker": "Suraj", "role": "Frontend Dev", "time": "09:15", "text": "Okay. I'll put together a reference list of what standard admin dashboard usually means — user management, order overview, payment reports, basic analytics. We confirm scope in Wednesday's call." },
+    { "speaker": "Rakesh",  "role": "Tech Lead",    "time": "09:16", "text": "Good. Everyone please review the effort doc when I share tonight. Wednesday's call is important — we need to go in aligned." }
+  ]
+}
