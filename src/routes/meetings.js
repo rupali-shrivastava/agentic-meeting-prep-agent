@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { runMeetingAgent, generateNextAgenda } from "../agent/meetingAgent.js";
-import { sendMeetingSummary } from "../services/mailService.js";
+import { sendMeetingSummary, sendMeetingBrief } from "../services/mailService.js";
 import { dispatchBriefForType } from "../services/scheduler.js";
 import { MEETING_TYPES } from "../constants/meetingTypes.js";
 
