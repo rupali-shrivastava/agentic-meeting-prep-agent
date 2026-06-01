@@ -6,13 +6,13 @@
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
   "participants": [
-    { "name": "Rupali",  "email": "rupali.shrivastava@beyondkey.com",  "role": "PM" },
-    { "name": "Varsha", "email": "varsha.goutam@beyondkey.com", "role": "Backend Dev" },
-    { "name": "Ajay",   "email": "ajay.jangam@beyondkey.com",   "role": "QA Lead" },
-    { "name": "Rakesh",  "email": "rakesh.bhargava@beyondkey.com",  "role": "Tech Lead" },
-    { "name": "Suraj", "email": "suraj.mane@beyondkey.com", "role": "Frontend Dev" },
-    { "name": "Vinod",  "email": "vinod.tiwari@beyondkey.com",  "role": "Delivery Mgr" },
-    { "name": "Vivek", "email": "vivek.verma@beyondkey.com", "role": "DevOps" }
+    { "name": "Rupali",  "email": "rupali.shrivastava@yopmail.com", "role": "PM" },
+    { "name": "Rakesh",  "email": "rakesh.bhargava@yopmail.com",    "role": "Tech Lead" },
+    { "name": "Vivek",   "email": "vivek.verma@yopmail.com",        "role": "DevOps" },
+    { "name": "Ajay",    "email": "ajay.jangam@yopmail.com",        "role": "QA Lead" },
+    { "name": "Varsha",  "email": "varsha.goutam@yopmail.com",      "role": "Backend Dev" },
+    { "name": "Suraj",   "email": "suraj.mane@yopmail.com",         "role": "Frontend Dev" },
+    { "name": "Vinod",   "email": "vinod.tiwari@yopmail.com",       "role": "Delivery Mgr" }
   ],
   "transcript": [
     { "speaker": "Rupali",  "role": "PM",           "time": "09:05", "text": "Good morning everyone. First thing — how was the weekend? Any prod issues?" },

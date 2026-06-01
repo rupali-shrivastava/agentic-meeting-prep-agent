@@ -40,6 +40,11 @@ async function loadMeetings(type) {
     meetingsData = data;
     container.innerHTML = "";
 
+    // Show project name from the first meeting record
+    const projectName = data[0]?.project || "";
+    const projectLabel = document.getElementById("project-label");
+    if (projectLabel) projectLabel.textContent = projectName;
+
     if (!data.length) {
       container.innerHTML = `
         <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#6b7280;text-align:center;padding:20px">

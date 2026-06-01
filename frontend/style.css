@@ -106,7 +106,8 @@ body {
   display: flex;
   flex-direction: column;
 }
-.left-panel h2 { margin: 0 0 16px; color: #1e3a8a; font-size: 18px; flex-shrink: 0; }
+.left-panel h2 { margin: 0 0 4px; color: #1e3a8a; font-size: 18px; flex-shrink: 0; }
+#project-label { margin: 0 0 14px; font-size: 13px; color: #6b7280; font-weight: 500; flex-shrink: 0; }
 .right-panel-header h2 { margin: 0; color: #1e3a8a; font-size: 18px; }
 
 /* Scrollable meetings list */

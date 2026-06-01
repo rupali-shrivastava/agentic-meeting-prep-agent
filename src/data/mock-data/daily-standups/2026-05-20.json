@@ -6,13 +6,13 @@
   "project": "Project Phoenix",
   "sprint": "Sprint 4",
   "participants": [
-    { "name": "Vinod",  "email": "vinod.tiwari@beyondkey.com",  "role": "Delivery Mgr" },
-    { "name": "Rupali",  "email": "rupali.shrivastava@beyondkey.com",  "role": "PM" },
-    { "name": "Vivek", "email": "vivek.verma@beyondkey.com", "role": "DevOps" },
-    { "name": "Rakesh",  "email": "rakesh.bhargava@beyondkey.com",  "role": "Tech Lead" },
-    { "name": "Ajay",   "email": "ajay.jangam@beyondkey.com",   "role": "QA Lead" },
-    { "name": "Suraj", "email": "suraj.mane@beyondkey.com", "role": "Frontend Dev" },
-    { "name": "Varsha", "email": "varsha.goutam@beyondkey.com", "role": "Backend Dev" }
+    { "name": "Rupali",  "email": "rupali.shrivastava@yopmail.com", "role": "PM" },
+    { "name": "Rakesh",  "email": "rakesh.bhargava@yopmail.com",    "role": "Tech Lead" },
+    { "name": "Vivek",   "email": "vivek.verma@yopmail.com",        "role": "DevOps" },
+    { "name": "Ajay",    "email": "ajay.jangam@yopmail.com",        "role": "QA Lead" },
+    { "name": "Varsha",  "email": "varsha.goutam@yopmail.com",      "role": "Backend Dev" },
+    { "name": "Suraj",   "email": "suraj.mane@yopmail.com",         "role": "Frontend Dev" },
+    { "name": "Vinod",   "email": "vinod.tiwari@yopmail.com",       "role": "Delivery Mgr" }
   ],
   "transcript": [
     { "speaker": "Vinod",  "role": "Delivery Mgr", "time": "08:55", "text": "Before we start the usual standup — yesterday's demo did not go well. I want to understand what happened. Client saw the error screen during the payment flow. Their team is upset and BU head is now cc'd on all communication." },
