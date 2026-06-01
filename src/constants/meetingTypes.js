@@ -20,18 +20,4 @@ export const MEETING_TYPES = [
     time: null,
     cronNotify: null,
   },
-  {
-    id: "sprint-reviews",
-    label: "Sprint Review",
-    folder: "sprint-reviews",
-    time: null,
-    cronNotify: null,
-  },
-  {
-    id: "retrospectives",
-    label: "Retrospective",
-    folder: "retrospectives",
-    time: "17:00",
-    cronNotify: "45 16 * * 5", // 4:45 PM every Friday — guarded to last Friday of month
-  },
 ];

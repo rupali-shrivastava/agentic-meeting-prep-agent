@@ -2,8 +2,8 @@ import express from "express";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import { runMeetingAgent, generateNextAgenda } from "../agent/meetingAgent.js";
-import { sendMeetingSummary, sendMeetingBrief } from "../services/mailService.js";
+import { generateNextAgenda } from "../agent/meetingAgent.js";
+import { sendMeetingBrief } from "../services/mailService.js";
 import { dispatchBriefForType } from "../services/scheduler.js";
 import { MEETING_TYPES } from "../constants/meetingTypes.js";
 
@@ -62,29 +62,6 @@ router.post("/prepare/batch", async (req, res) => {
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: "Failed to generate next agenda", details: String(err) });
-  }
-});
-
-// POST /send-mail — generate preparation for a single meeting and email the summary
-router.post("/send-mail", async (req, res) => {
-  try {
-    const { meeting, emails } = req.body;
-
-    if (!meeting) return res.status(400).json({ error: "Meeting is required" });
-    if (!emails || !emails.length) return res.status(400).json({ error: "Recipient emails are required" });
-
-    const result = await runMeetingAgent(meeting);
-    const prep = result.preparation || {};
-
-    await sendMeetingSummary({
-      to: emails,
-      subject: `Meeting Summary - ${meeting.project || "Meeting"}`,
-      html: `<h2>Meeting Summary</h2><p>${prep.summary || ""}</p>`
-    });
-
-    res.json({ success: true, message: "Email sent successfully" });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to send email", details: String(err) });
   }
 });
 

@@ -1,10 +1,5 @@
 import sgMail from "@sendgrid/mail";
 
-export async function sendMeetingSummary({ to, subject, html }) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  return sgMail.send({ to, from: process.env.SENDGRID_FROM, subject, html });
-}
-
 // Sends a personalised email to each participant individually
 export async function sendMeetingBrief({ participants, meetingType, meetingDate, meetingTime, project, prep }) {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
