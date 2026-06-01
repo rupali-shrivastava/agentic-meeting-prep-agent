@@ -69,7 +69,7 @@ async function loadMeetings(type) {
         : escapeHtml(String(meeting.participants || ""));
 
       const transcriptPreview = Array.isArray(meeting.transcript)
-        ? meeting.transcript.slice(0, 3).map(t => `<li><strong>${escapeHtml(t.speaker)}</strong> — ${escapeHtml(t.text)}</li>`).join("")
+        ? meeting.transcript.map(t => `<li><strong>${escapeHtml(t.speaker)}</strong> — ${escapeHtml(t.text)}</li>`).join("")
         : "";
 
       const dateTime = meeting.dateTime

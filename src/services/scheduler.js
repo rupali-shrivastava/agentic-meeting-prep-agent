@@ -11,13 +11,6 @@ const __dirname  = path.dirname(__filename);
 
 // ─── Date helpers ────────────────────────────────────────────────────────────
 
-function isLastFridayOfMonthDate(date) {
-  if (date.getDay() !== 5) return false;
-  const next = new Date(date);
-  next.setDate(date.getDate() + 7);
-  return next.getMonth() !== date.getMonth();
-}
-
 /**
  * Compute the next meeting date for a given meeting type.
  * Returns a Date object (IST) representing when the meeting will occur.
@@ -62,19 +55,6 @@ function getNextMeetingDate(meetingType) {
     d = candidateAt(addDays(now, daysUntilFriday));
     // If that Friday's meeting time has already passed today, move to next Friday
     if (d <= now) d = candidateAt(addDays(d, 7));
-    return d;
-  }
-
-  if (meetingType.id === "retrospectives") {
-    // Next last-Friday of any month at meeting time
-    let d = candidateAt(now);
-    const daysUntilFriday = (5 - now.getDay() + 7) % 7;
-    d = candidateAt(addDays(now, daysUntilFriday === 0 ? 7 : daysUntilFriday));
-    while (!isLastFridayOfMonthDate(d)) d = candidateAt(addDays(d, 7));
-    if (d <= now) {
-      d = candidateAt(addDays(d, 7));
-      while (!isLastFridayOfMonthDate(d)) d = candidateAt(addDays(d, 7));
-    }
     return d;
   }
 
@@ -203,7 +183,6 @@ export function startScheduler() {
     cron.schedule(
       meetingType.cronNotify,
       async () => {
-        if (meetingType.id === "retrospectives" && !isLastFridayOfMonthDate(new Date())) return;
         try {
           await dispatchBriefForType(meetingType);
         } catch (err) {
